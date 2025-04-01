@@ -17,10 +17,7 @@ Based on initial data analysis, the regression task was selected as the primary 
 vnexpress-analysis-project/ 
 ├── data/ 
 │ ├── raw/ # Raw data files 
-│ │ ├── vnexpress_raw_data.csv 
-│ │ └── vnexpress_khoahoc_raw_data.csv 
-│ └── processed/ # Processed data files 
-│ └── news_cleaned.csv 
+│ └── vnexpress_raw_data.csv
 ├── notebooks/ 
 │ ├── 01_data_overview.ipynb 
 │ ├── 02_data_cleaning.ipynb 
