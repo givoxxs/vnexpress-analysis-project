@@ -128,4 +128,4 @@ nltk
 - [Natural Language Processing with Python](https://www.nltk.org/book/)
 - [Pandas documentation](https://pandas.pydata.org/docs/)
 - [VnExpress](https://vnexpress.net/)
-
+- [Vietnamese Stopword](https://github.com/stopwords/vietnamese-stopwords/tree/master)
