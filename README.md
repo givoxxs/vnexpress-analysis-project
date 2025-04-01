@@ -1,33 +1,131 @@
-# VNExpress News Analysis Project
+# Dự án Phân tích Dữ liệu Báo VnExpress
 
-This project analyzes news articles from VNExpress to understand factors that influence the number of comments on articles and to classify articles between science and technology categories.
+Dự án này thực hiện phân tích bài báo từ VnExpress, tập trung vào hai lĩnh vực chính: **Công nghệ** và **Khoa học**. Mục tiêu là phân loại các bài báo dựa trên nội dung và đặc điểm của chúng.
 
-## Problem Statement
+## Giới thiệu
 
-This project addresses two main tasks:
+Dự án sử dụng kỹ thuật khai phá dữ liệu và học máy để:
+- Phân tích đặc điểm của bài viết thuộc hai nhóm Công nghệ và Khoa học
+- Xây dựng các đặc trưng để phân biệt giữa hai nhóm
+- Áp dụng các mô hình phân loại để tự động nhận dạng chủ đề của bài viết
 
-1. **Regression Task**: Predict the number of comments (`nums_of_comments`) on articles based on various features like title length, content, author, and publication time.
+## Cấu trúc dự án
 
-2. **Classification Task**: Classify articles into their respective groups (Science/Technology) based on textual content and metadata.
+```
+vnexpress-analysis-project/
+├── clean_data/                 # Dữ liệu sau khi đã xử lý
+│   ├── vnexpress_clean_data.csv
+│   ├── vnexpress_encoded_data.csv
+│   └── vnexpress_featured_data.csv
+├── notebooks/                  # Jupyter notebooks phân tích
+│   ├── 01_data_overview.ipynb  # Tổng quan dữ liệu
+│   ├── 02_data_cleaning.ipynb  # Làm sạch dữ liệu
+│   ├── 03_data_encoding.ipynb  # Mã hóa dữ liệu
+│   ├── 04_feature_engineering.ipynb  # Xây dựng đặc trưng
+│   ├── 05_multivariate_analysis.ipynb  # Phân tích đa biến
+│   └── 06_conclusion_feasibility.ipynb  # Kết luận và đánh giá
+├── raw_data/                   # Dữ liệu thô ban đầu
+│   └── vnexpress_raw_data.csv
+└── README.md                   # Tài liệu hướng dẫn
+```
 
-Based on initial data analysis, the regression task was selected as the primary focus due to interesting patterns observed between article characteristics and engagement metrics.
+## Dữ liệu
 
-## Project Structure
+Dữ liệu gốc gồm các bài báo được thu thập từ VnExpress có các trường:
+- `title`: Tiêu đề bài viết
+- `description`: Mô tả ngắn gọn về nội dung
+- `content`: Nội dung bài viết
+- `group`: Danh mục bài viết (Công nghệ, Khoa học)
+- `category`: Thể loại bài viết chi tiết
+- `date`: Ngày xuất bản bài viết
+- `author`: Tác giả bài viết
+- `url`: Đường dẫn đến bài viết
+- `thumbnail`: Đường dẫn đến hình ảnh đại diện bài viết
+- `nums_of_comments`: Số lượng bình luận
 
-vnexpress-analysis-project/ 
-├── data/ 
-│ ├── raw/ # Raw data files 
-│ └── vnexpress_raw_data.csv
-├── notebooks/ 
-│ ├── 01_data_overview.ipynb 
-│ ├── 02_data_cleaning.ipynb 
-│ ├── 03_feature_engineering.ipynb 
-│ ├── 04_data_visualization.ipynb 
-│ └── 05_final_analysis.ipynb 
-├── scripts/ 
-│ ├── crawl_data.py 
-│ ├── data_cleaning.py 
-│ ├── feature_engineering.py 
-│ └── visualization.py 
-└── requirements.txt
+## Các bước phân tích dữ liệu
+
+### 1. Tổng quan dữ liệu
+Hiểu cấu trúc dữ liệu, phân bố các nhóm bài viết và khám phá đặc điểm dữ liệu.
+
+### 2. Làm sạch dữ liệu
+Tiền xử lý dữ liệu: xử lý giá trị thiếu, chuẩn hóa văn bản và chuyển đổi định dạng ngày tháng.
+
+### 3. Mã hóa dữ liệu
+Chuyển đổi dữ liệu văn bản thành các đặc trưng số sử dụng TF-IDF, mã hóa các biến danh mục.
+
+### 4. Xây dựng đặc trưng
+Tạo các đặc trưng mới từ dữ liệu hiện có, như tỷ lệ tiêu đề/nội dung, thời gian đăng bài, độ phức tạp văn bản.
+
+### 5. Phân tích đa biến
+Phân tích mối quan hệ giữa các đặc trưng, trực quan hóa phân bố dữ liệu.
+
+### 6. Đánh giá khả thi và kết luận
+Tổng hợp kết quả phân tích, đánh giá khả năng phân loại bài viết.
+
+## Hướng dẫn chạy chương trình
+
+### Yêu cầu cài đặt
+```
+Python 3.8+
+Jupyter Notebook
+pandas
+numpy
+matplotlib
+seaborn
+scikit-learn
+nltk
+```
+
+### Trình tự thực hiện
+
+1. **Thiết lập môi trường**:
+   ```bash
+   # Tạo môi trường ảo (khuyến nghị)
+   python -m venv venv
+   
+   # Kích hoạt môi trường ảo
+   # Windows
+   venv\Scripts\activate
+   # Linux/Mac
+   source venv/bin/activate
+   
+   # Cài đặt các thư viện cần thiết
+   pip install pandas numpy matplotlib seaborn scikit-learn nltk jupyter
+   ```
+
+2. **Chạy các notebook theo thứ tự**:
+   - Đầu tiên, khởi động Jupyter Notebook:
+     ```bash
+     jupyter notebook
+     ```
+   - Mở và thực thi các notebook theo trình tự:
+     1. `01_data_overview.ipynb`: Hiểu về dữ liệu
+     2. `02_data_cleaning.ipynb`: Làm sạch dữ liệu (tạo file `vnexpress_clean_data.csv`)
+     3. `03_data_encoding.ipynb`: Mã hóa dữ liệu (tạo file `vnexpress_encoded_data.csv`)
+     4. `04_feature_engineering.ipynb`: Xây dựng đặc trưng (tạo file `vnexpress_featured_data.csv`)
+     5. `05_multivariate_analysis.ipynb`: Phân tích đa biến
+     6. `06_conclusion_feasibility.ipynb`: Kết luận và đánh giá khả thi
+
+3. **Lưu ý khi chạy**:
+   - Đảm bảo các notebook được chạy theo đúng thứ tự từ 1 đến 6
+   - Mỗi notebook sẽ tạo ra các file dữ liệu trung gian trong thư mục `clean_data/`
+   - Kiểm tra kết quả đầu ra của mỗi bước trước khi tiến hành bước tiếp theo
+
+## Kết quả chính
+
+- Xác định được các đặc trưng quan trọng giúp phân biệt bài viết Công nghệ và Khoa học
+- Phân tích tương quan giữa các đặc trưng và nhóm bài viết
+- Giảm chiều dữ liệu để trực quan hóa và cải thiện hiệu suất mô hình
+- Đánh giá khả năng phân loại dựa trên các đặc trưng đã được xây dựng
+
+## Tác giả
+
+- **Giao Phan** - *Sinh viên Khoa học Dữ liệu*
+
+## Tài liệu tham khảo
+- [Scikit-learn documentation](https://scikit-learn.org/stable/documentation.html)
+- [Natural Language Processing with Python](https://www.nltk.org/book/)
+- [Pandas documentation](https://pandas.pydata.org/docs/)
+- [VnExpress](https://vnexpress.net/)
 
