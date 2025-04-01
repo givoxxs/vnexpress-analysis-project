@@ -121,7 +121,9 @@ nltk
 
 ## Tác giả
 
-- **Giao Phan** - *Sinh viên Khoa học Dữ liệu*
+- **Phan Văn Toàn** 
+- **Trương Xuân Phúc**
+- **Ngô Thị Kim Ly**
 
 ## Tài liệu tham khảo
 - [Scikit-learn documentation](https://scikit-learn.org/stable/documentation.html)
